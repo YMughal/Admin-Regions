@@ -1,4 +1,4 @@
-export const categories = [
+export const subRegions = [
   {
     "SubRegionID": 1,
     "SubRegionName": "US",

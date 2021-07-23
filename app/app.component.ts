@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProductsService } from './products.service';
-import { categories } from './categories';
+import { subRegions } from './subRegions';
 
 const createFormGroup = dataItem =>
   new FormGroup({
@@ -50,7 +50,7 @@ const createFormGroup = dataItem =>
           let-formGroup="formGroup"
         >
           <kendo-dropdownlist
-            [data]="categories"
+            [data]="subRegions"
             (valueChange)="onCategoryChange($event)"
             textField="SubRegionName"
             valueField="SubRegionID"
@@ -60,6 +60,20 @@ const createFormGroup = dataItem =>
           </kendo-dropdownlist>
         </ng-template>
       </kendo-grid-column>
+      <kendo-grid-column field="RegionName" title="Country" width="200">
+      <ng-template
+        kendoGridEditTemplate
+        let-dataItem="dataItem"
+        let-formGroup="formGroup"
+      >
+        <kendo-dropdownlist
+          #namesDropDown
+          [data]="names"
+          [formControl]="formGroup.get('RegionName')"
+        >
+        </kendo-dropdownlist>
+      </ng-template>
+    </kendo-grid-column>
       <kendo-grid-command-column title="command" width="220">
         <ng-template kendoGridCellTemplate let-isNew="isNew">
           <button kendoGridEditCommand [primary]="true">Edit</button>
@@ -79,7 +93,7 @@ export class AppComponent implements OnInit {
   @ViewChild('namesDropDown') private namesDdl;
   private editedRowIndex: number;
   public gridData: any[];
-  public categories: any[] = categories;
+  public subRegions: any[] = subRegions;
   public names: any[];
   public formGroup: FormGroup;
 
@@ -90,7 +104,7 @@ export class AppComponent implements OnInit {
   }
 
   public category(id: number): any {
-    return this.categories.find(x => x.SubRegionID === id);
+    return this.subRegions.find(x => x.SubRegionID === id);
   }
 
   public getNames(subRegionID: number) {
