@@ -7,14 +7,6 @@ const createFormGroup = dataItem =>
   new FormGroup({
     RegionID: new FormControl(dataItem.RegionID),
     RegionName: new FormControl(dataItem.RegionName, Validators.required),
-    UnitPrice: new FormControl(dataItem.UnitPrice),
-    UnitsInStock: new FormControl(
-      dataItem.UnitsInStock,
-      Validators.compose([
-        Validators.required,
-        Validators.pattern('^[0-9]{1,2}')
-      ])
-    ),
     SubRegionID: new FormControl(dataItem.SubRegionID)
   });
 
@@ -67,21 +59,6 @@ const createFormGroup = dataItem =>
           >
           </kendo-dropdownlist>
         </ng-template>
-      </kendo-grid-column>
-      <kendo-grid-column
-        field="UnitPrice"
-        title="Price"
-        format="{0:c}"
-        width="80"
-        editor="numeric"
-      >
-      </kendo-grid-column>
-      <kendo-grid-column
-        field="UnitsInStock"
-        title="In stock"
-        width="80"
-        editor="numeric"
-      >
       </kendo-grid-column>
       <kendo-grid-command-column title="command" width="220">
         <ng-template kendoGridCellTemplate let-isNew="isNew">
